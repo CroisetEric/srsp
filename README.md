@@ -1,0 +1,2 @@
+# srsp
+SonarrRadarrSabnzbdPlex
