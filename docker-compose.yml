@@ -1,0 +1,60 @@
+version: "3.3"
+services:
+    sabnzbd:
+        image: ${SABNZBDIMG}
+        container_name: ${SABNZBDCONTAINERNAME}
+        environment:
+        - PUID=${SABNZBDUID}
+        - PGID=${SABNZBDGID}
+        - TZ=${TIMEZONE}
+        volumes:
+        - ${SABNZBDHOME}:/config
+        - ${DOWNLOADFOLDER}:/downloads #optional
+        - ${INCOMPLETEDOWNLOADS}:/incomplete-downloads #optional
+        ports:
+        - ${SABNZBDPORT}:8080
+        restart: unless-stopped
+    sonarr:
+        image: ${SONARRIMG}
+        container_name: ${SONARRCONTAINERNAME}
+        environment:
+        - PUID=${SONARRUID}
+        - PGID=${SONARRGID}
+        - TZ=${TIMEZONE}
+        volumes:
+        - ${SONARRHOME}:/config
+        - ${SERIESFOLDER}:/tv #optional
+        - ${COMPLETEDDOWNLOADS}:/downloads #optional
+        ports:
+        - ${SONARRPORT}:8989
+        restart: unless-stopped
+    radarr:
+        image: ${RADARRIMG}
+        container_name: ${RADARRCONTAINERNAME}
+        environment:
+        - PUID=${RADARRUID}
+        - PGID=${RADARRGID}
+        - TZ=${TIMEZONE}
+        volumes:
+        - ${RADARRHOME}:/config
+        - ${MOVIESFOLDER}:/movies #optional
+        - ${COMPLETEDDOWNLOADS}:/downloads #optional
+        ports:
+        - ${RADARRPORT}:7878
+        restart: unless-stopped
+    # plex:
+    #     image: ${PLEXIMAGE}
+    #     container_name: ${PLEXCONNTAINERNAME}
+    #     network_mode: bridge
+    #     environment:
+    #     - PUID=${PLEXUID}
+    #     - PGID=${PLEXGID}
+    #     - VERSION=${PLEXVERSION}
+    #     - PLEX_CLAIM= ${PLEXCLAIM}
+    #     volumes:
+    #     - ${PLEXHOME}:/config
+    #     - ${SERIESFOLDER}:/tv
+    #     - ${MOVIESFOLDER}:/movies
+    #     ports:
+    #     - ${PLEXPORT}:32400
+    #     restart: unless-stopped
