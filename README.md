@@ -1,5 +1,5 @@
 # SRSP - Sonarr Radarr SabNZBd Plex
-The setup **S**onarr**R**adarr**S**abNZBd on Docker is possible with a singel [[docker-compose.yml]] and a simple [[srs.env]]. The [[srs.env]] is the file where all the configuration settings can be customized to ones setup. This documentation assumes the reader has a basic knowledge of the linux terminal and navigating the filesystem.
+The setup **S**onarr**R**adarr**S**abNZBd on Docker is possible with a singel [docker-compose.yml](docker-compose.yml) and a simple [srs.env](srs.env). The [srs.env](srs.env) is the file where all the configuration settings can be customized to ones setup. This documentation assumes the reader has a basic knowledge of the linux terminal and navigating the filesystem.
 
 - [Quick Setup](#quick-setup)
 - [Installing Docker on Ubuntu Server PVE](#installing-docker-on-ubuntu-server-pve)
@@ -24,14 +24,14 @@ The setup **S**onarr**R**adarr**S**abNZBd on Docker is possible with a singel [[
 
 ## Quick Setup
 This QS supposes you already have a docker environement up and running.
-Copy the [[docker-compose.yml|docker compose file]] and the [[srs.env|env file]] file to a local directory. Make sure that all the paths in the [[srs.env|env file]] file exist and will be reachable for the Docker containers. Fit ports, user- and group-id's and other settings to your environement.
-**Important:** Rename the [[srs.env|env file]] [[srs.env]] to `.env` -> [[#Wrong ENV file name]] (take note that naming the env file like that will make it invisible to ls (use "ls -ahl"))
-Then you just deploy the [[docker-compose.yml|docker compose file]] with:
+Copy the [docker compose file](docker-compose.yml) and the [env file](srs.envl) file to a local directory. Make sure that all the paths in the [env file](srs.envl) file exist and will be reachable for the Docker containers. Fit ports, user- and group-id's and other settings to your environement.
+**Important:** Rename the [env file](srs.envl) [srs.env](srs.env) to `.env` -> [#Wrong ENV file name](#Wrong ENV file name) (take note that naming the env file like that will make it invisible to ls (use "ls -ahl"))
+Then you just deploy the [docker compose file](docker-compose.yml) with:
 ```bash
 cd C:\YMLDirector\ (in my case /data/compose)
 docker-compose up -d
 ```
-Lookup [[#Not running containers in the background]] for explanations about `-d`
+Lookup [#Not running containers in the background](#Not running containers in the background) for explanations about `-d`
 
 ## Installing Docker on Ubuntu Server PVE
 Source: [Installing Docker and Utils on Ubuntu](https://wiki.ssdt-ohio.org/display/rtd/Install+Docker+and+Docker+tools+on+Ubuntu)
@@ -57,7 +57,7 @@ I modified the installation by adding a file `daemon.json` under `/etc/docker/`
   "data-root" : "/data/docker"
 }
 ```
-This was to modify the directory wherein Docker saves its data. -> Also read [[#System folders]] 
+This was to modify the directory wherein Docker saves its data. -> Also read [#System folders](#System folders) 
 
 By editing `/etc/systemd/system/docker.service.d/override.conf` you can then enable the settings from `daemon.json`. You can edit `override.conf` with the command `systemctl edit docker`:
 ```override.conf
@@ -75,15 +75,15 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ### Starting the containers
-Follow the instructions from the [[#Quick Setup]] chapter with your working environement. 
+Follow the instructions from the [#Quick Setup](#Quick Setup) chapter with your working environement. 
 
 ### Docker-compose.yml
 This file defines the different Services and their respective configurations.
 
-Al changable variables are defined in the [[srs.env|env file]] so I will comment on those options which you can then correlate to the [[docker-compose.yml|docker compose file]].
+Al changable variables are defined in the [env file](srs.envl) so I will comment on those options which you can then correlate to the [docker compose file](docker-compose.yml).
 
 #### Container names and images
-These should be selfexplanatory. The documentation from the the [[#SOURCES|sources]] provided the image links. 
+These should be selfexplanatory. The documentation from the the [sources](#SOURCES) provided the image links. 
 ``` ENV
 SABNZBDIMG=lscr.io/linuxserver/sabnzbd:latest
 SABNZBDCONTAINERNAME=sabnzbd
@@ -91,9 +91,9 @@ SABNZBDCONTAINERNAME=sabnzbd
 
 #### Folder definitions
 ##### System folders
-In the chapter [[#Configure Docker]] you are able to define a different storage folder for the docker installation. This enables you to keep all relevant docker data on a secured nas attached over nfs and run the containers on a small and efficient virtual machine.
+In the chapter [#Configure Docker](#Configure Docker) you are able to define a different storage folder for the docker installation. This enables you to keep all relevant docker data on a secured nas attached over nfs and run the containers on a small and efficient virtual machine.
 
-Therefore all the folders under "#SOFTWARE CONFIGURATION FOLDER VARIABLES" in the [[srs.env|env file]] could also be defined to be on the nas storage, which facilitates a future migration and mitigates the damage caused by the failure of the virtual machine.
+Therefore all the folders under "#SOFTWARE CONFIGURATION FOLDER VARIABLES" in the [env file](srs.envl) could also be defined to be on the nas storage, which facilitates a future migration and mitigates the damage caused by the failure of the virtual machine.
 
 ###### Example
 *srsp* = SonarrRadarrSabnzbdPlex
@@ -131,7 +131,7 @@ MOVIESFOLDER=/medialibrary/media/movies
 ```
 
 ##### Ports Users Groups
-My OCD kicked in with the srs ports under *#PORTS* but you could set them to default (you can find the default ports in the [[docker-compose.yml|docker compose file]])
+My OCD kicked in with the srs ports under *#PORTS* but you could set them to default (you can find the default ports in the [docker compose file](docker-compose.yml))
 
 The user and group id's need to be fitted to your system, but if you built a virtual machine just for these services, you can leve them as is.
 
@@ -145,11 +145,11 @@ PLEXPORT=32400
 ```
 
 ##### Plexclaim
-The [[https://www.plex.tv/claim/|plex claim]] is used to add the plex server to an account. This setting can stay empty. You can get your claim token from [[https://www.plex.tv/claim/]]
+The [plex claim](https://www.plex.tv/claim/) is used to add the plex server to an account. This setting can stay empty. You can get your claim token from https://www.plex.tv/claim/
 
 ### Mistakes
 #### Wrong ENV file name
-I had some issues getting the containers running because it would not read my [[srs.env]] file. This was due to my missunderstanding about the required filename. The version of `docker-compose` I installed (1.16.1) did not allow to specify a ENV file. Therefore [[srs.env]] needed to be called `.env`
+I had some issues getting the containers running because it would not read my [srs.env](srs.env) file. This was due to my missunderstanding about the required filename. The version of `docker-compose` I installed (1.16.1) did not allow to specify a ENV file. Therefore [srs.env](srs.env) needed to be called `.env`
 Here are the contents of the `compose` directory:
 >/data/compose ls -a
 .env  docker-compose.yml
