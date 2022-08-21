@@ -24,8 +24,8 @@ The setup **S**onarr**R**adarr**S**abNZBd on Docker is possible with a singel [d
 
 ## Quick Setup
 This QS supposes you already have a docker environement up and running.
-Copy the [docker compose file](docker-compose.yml) and the [env file](srs.envl) file to a local directory. Make sure that all the paths in the [env file](srs.envl) file exist and will be reachable for the Docker containers. Fit ports, user- and group-id's and other settings to your environement.
-**Important:** Rename the [env file](srs.envl) [srs.env](srs.env) to `.env` -> [#Wrong ENV file name](#Wrong ENV file name) (take note that naming the env file like that will make it invisible to ls (use "ls -ahl"))
+Copy the [docker compose file](docker-compose.yml) and the [env file](srs.env) file to a local directory. Make sure that all the paths in the [env file](srs.env) file exist and will be reachable for the Docker containers. Fit ports, user- and group-id's and other settings to your environement.
+**Important:** Rename the [env file](srs.env) [srs.env](srs.env) to `.env` -> [#Wrong ENV file name](#Wrong ENV file name) (take note that naming the env file like that will make it invisible to ls (use "ls -ahl"))
 Then you just deploy the [docker compose file](docker-compose.yml) with:
 ```bash
 cd C:\YMLDirector\ (in my case /data/compose)
@@ -80,7 +80,7 @@ Follow the instructions from the [#Quick Setup](#Quick Setup) chapter with your 
 ### Docker-compose.yml
 This file defines the different Services and their respective configurations.
 
-Al changable variables are defined in the [env file](srs.envl) so I will comment on those options which you can then correlate to the [docker compose file](docker-compose.yml).
+Al changable variables are defined in the [env file](srs.env) so I will comment on those options which you can then correlate to the [docker compose file](docker-compose.yml).
 
 #### Container names and images
 These should be selfexplanatory. The documentation from the the [sources](#SOURCES) provided the image links. 
@@ -93,7 +93,7 @@ SABNZBDCONTAINERNAME=sabnzbd
 ##### System folders
 In the chapter [#Configure Docker](#Configure Docker) you are able to define a different storage folder for the docker installation. This enables you to keep all relevant docker data on a secured nas attached over nfs and run the containers on a small and efficient virtual machine.
 
-Therefore all the folders under "#SOFTWARE CONFIGURATION FOLDER VARIABLES" in the [env file](srs.envl) could also be defined to be on the nas storage, which facilitates a future migration and mitigates the damage caused by the failure of the virtual machine.
+Therefore all the folders under "#SOFTWARE CONFIGURATION FOLDER VARIABLES" in the [env file](srs.env) could also be defined to be on the nas storage, which facilitates a future migration and mitigates the damage caused by the failure of the virtual machine.
 
 ###### Example
 *srsp* = SonarrRadarrSabnzbdPlex
