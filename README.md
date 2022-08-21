@@ -25,13 +25,13 @@ The setup **S**onarr**R**adarr**S**abNZBd on Docker is possible with a singel [d
 ## Quick Setup
 This QS supposes you already have a docker environement up and running.
 Copy the [docker compose file](docker-compose.yml) and the [env file](srs.env) file to a local directory. Make sure that all the paths in the [env file](srs.env) file exist and will be reachable for the Docker containers. Fit ports, user- and group-id's and other settings to your environement.
-**Important:** Rename the [env file](srs.env) [srs.env](srs.env) to `.env` -> [#Wrong ENV file name](#Wrong ENV file name) (take note that naming the env file like that will make it invisible to ls (use "ls -ahl"))
+**Important:** Rename the [env file](srs.env) [srs.env](srs.env) to `.env` -> [#Wrong ENV file name](#wrong-env-file-name) (take note that naming the env file like that will make it invisible to ls (use "ls -ahl"))
 Then you just deploy the [docker compose file](docker-compose.yml) with:
 ```bash
 cd C:\YMLDirector\ (in my case /data/compose)
 docker-compose up -d
 ```
-Lookup [#Not running containers in the background](#Not running containers in the background) for explanations about `-d`
+Lookup [#Not running containers in the background](#not-running-containers-in-the-background) for explanations about `-d`
 
 ## Installing Docker on Ubuntu Server PVE
 Source: [Installing Docker and Utils on Ubuntu](https://wiki.ssdt-ohio.org/display/rtd/Install+Docker+and+Docker+tools+on+Ubuntu)
@@ -57,7 +57,7 @@ I modified the installation by adding a file `daemon.json` under `/etc/docker/`
   "data-root" : "/data/docker"
 }
 ```
-This was to modify the directory wherein Docker saves its data. -> Also read [#System folders](#System folders) 
+This was to modify the directory wherein Docker saves its data. -> Also read [#System folders](#system-folders) 
 
 By editing `/etc/systemd/system/docker.service.d/override.conf` you can then enable the settings from `daemon.json`. You can edit `override.conf` with the command `systemctl edit docker`:
 ```override.conf
@@ -75,7 +75,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ### Starting the containers
-Follow the instructions from the [#Quick Setup](#Quick Setup) chapter with your working environement. 
+Follow the instructions from the [#Quick Setup](#quick-setup) chapter with your working environement. 
 
 ### Docker-compose.yml
 This file defines the different Services and their respective configurations.
@@ -83,7 +83,7 @@ This file defines the different Services and their respective configurations.
 Al changable variables are defined in the [env file](srs.env) so I will comment on those options which you can then correlate to the [docker compose file](docker-compose.yml).
 
 #### Container names and images
-These should be selfexplanatory. The documentation from the the [sources](#SOURCES) provided the image links. 
+These should be selfexplanatory. The documentation from the the [sources](#sources) provided the image links. 
 ``` ENV
 SABNZBDIMG=lscr.io/linuxserver/sabnzbd:latest
 SABNZBDCONTAINERNAME=sabnzbd
@@ -91,7 +91,7 @@ SABNZBDCONTAINERNAME=sabnzbd
 
 #### Folder definitions
 ##### System folders
-In the chapter [#Configure Docker](#Configure Docker) you are able to define a different storage folder for the docker installation. This enables you to keep all relevant docker data on a secured nas attached over nfs and run the containers on a small and efficient virtual machine.
+In the chapter [#Configure Docker](#configure-dockers) you are able to define a different storage folder for the docker installation. This enables you to keep all relevant docker data on a secured nas attached over nfs and run the containers on a small and efficient virtual machine.
 
 Therefore all the folders under "#SOFTWARE CONFIGURATION FOLDER VARIABLES" in the [env file](srs.env) could also be defined to be on the nas storage, which facilitates a future migration and mitigates the damage caused by the failure of the virtual machine.
 
